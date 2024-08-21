@@ -6,9 +6,8 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 // $routes->get('/', 'Home::index');
-// $routes->get('/', 'MeetingController::calendar');
+$routes->get('/', 'MeetingController::calendar');
 $routes->group('meeting', function ($routes) {
-    $routes->get('calendar/', 'MeetingController::calendar');
     $routes->post('eventdetails/(:num)/(:num)', 'MeetingController::getMeetingDetails/$1/$2');
     $routes->post('sprintdetails/(:num)', 'MeetingController::getSprintDetails/$1');
     $routes->post('sprintByProduct/(:num)', 'MeetingController::sprintByProduct/$1');
