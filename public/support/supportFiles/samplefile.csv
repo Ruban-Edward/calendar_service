@@ -1,0 +1,15 @@
+Module / Page,Epic,,User Stories,,,,"Notes 
+(Conditions, Mandatory fields, etc..)",Acceptance Criteria,,
+,ID,Description,ID,As a / an ,I want,So that,,Given,When ,Then
+Booking,1,An option to show the flight search results and create the PNR in one PCC and issue the ticket in another PCC,US1,<b>user<b/>,an option in the application to create a PNR in one PCC and issue the ticket in another PCC,I get the benefit of segment commission from the Airline,,that the Cleartrip user,raising a booking ,the PNR should be created in one PCC and ticket issuance should be in another PCC
+,,,US2,Cleartrip user,the option to create PNR and issue ticket in differnet PCC under a single provider / reservation system,the PNR creation and ticket issuance are done in under the same provider / reservation system,,that the Cleartrip user,raising a booking ,"the PNR should be created in one Supplier / PCC and ticket issuance should be in another Supplier / PCC, but under a same provider / reservation system
+
+Note 
+This should be available only for GDS provider "
+,,,US3,Cleartrip user,the option to create PNR and issue ticket in differnet PCC for all booking types,I can get the benefit from all type of booking,,that the Cleartrip user,raising a online / import booking,"the multi Supplier / PCC booking process should get applied.
+Incase of import booking, the system should check the criteria in which the imported PNR is blocked and based on those details, the Supplier/PCC should be selected for ticket issuance as well
+Incase of online booking , the process similar to that import booking should be followed, the only difference would be in online booking, the PNR will get created in the AgentBox application itself"
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,

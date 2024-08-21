@@ -1,0 +1,552 @@
+.calendar {
+    height: 95vh;
+    color: black;
+    margin-top: 5px;
+}
+
+.fc .fc-daygrid-day-number {
+    padding: 0 4px 8px 4px;
+    position: relative;
+    z-index: 4;
+}
+
+.fc .fc-MeetingDropdown-button.fc-button-primary,
+.fc .fc-MeetTypeDropdown-button.fc-button-primary,
+.fc .fc-ProductDropdown-button.fc-button-primary,
+.fc .fc-StatusDropdown-button.fc-button-primary,
+
+.fc .fc-GroupButton-button.fc-button-primary {
+    background-color: #4A90E2;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fc .fc-HelpButton-button.fc-button-primary{
+    background: unset;
+    border: unset;
+    position: absolute;
+    bottom: -85px;
+    right: 16px;
+    z-index: 1000;
+    opacity: 0.3;
+}
+
+.fc-HelpButton-button.fc-button-primary:hover{
+    background: unset !important;
+}
+
+.help-button{
+    background: gray;
+    border-radius: 25px;
+    padding: 8px 14px;
+}
+
+.calendar .dropdown-item {
+    padding-left: 50px;
+    position: relative;
+}
+
+.calendar .dropdown-item i {
+    position: absolute;
+    left: 20px;
+    top: 11px;
+}
+
+.form-control {
+    font-size: 0.9rem;
+}
+
+.form-select {
+    font-size: 0.9rem;
+}
+
+.fc .fc-button-primary:hover {
+    background-color: #357ABD;
+}
+
+.fc .fc-button-primary:active {
+    background-color: #357ABD;
+}
+
+.btn.dropdown-toggle {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.calendar .fc-daygrid-day-events {
+    margin-top: -9px;
+    cursor: pointer;
+}
+
+.calendar .fc-daygrid-day-events:hover {
+    z-index: 1000;
+}
+
+.fc-scrollgrid-sync-inner {
+    padding: 7px;
+    font-weight: bold;
+}
+
+.fc-day-past .fc-daygrid-day-number {
+    color: #3948ab48;
+}
+
+.fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event,
+.fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event,
+.fc-event.fc-event-start.fc-event-end.fc-event-today.fc-daygrid-event.fc-daygrid-dot-event {
+    margin-bottom: 2px;
+    transition: .3s ease-in-out;
+}
+
+.fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event:hover,
+.fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event:hover,
+.fc-event.fc-event-start.fc-event-end.fc-event-today.fc-daygrid-event.fc-daygrid-dot-event:hover {
+    margin-bottom: 2px;
+    transform: scale(1.07);
+}
+
+.fc-h-event {
+    background-color: transparent;
+    border: none;
+    font-weight: 800;
+    padding: 2px;
+}
+
+.fc-daygrid-body tr:nth-child(6) {
+    display: none;
+}
+
+.fc .fc-col-header-cell {
+    background-color: #3949ab;
+    /* Change to your desired color */
+}
+
+.fc .fc-col-header-cell-cushion {
+    color: white;
+}
+
+.fc-daygrid-day-number {
+    color: #3949ab;
+    font-weight: 700;
+}
+
+.calendar .fc-header-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fc .fc-popover {
+    z-index: 1000;
+}
+
+#dropdownMenuButton1,
+#dropdownMenuButton2,
+#dropdownMenuButton3,
+#dropdownMenuButton4,
+#dropdownMenuButton5,
+#helpButton {
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.calendar .dropdown-item {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.cls-complete {
+    color: #801111;
+}
+
+.cls-going {
+    color: #02d125;
+}
+
+.cls-upcoming {
+    color: #ffcb01;
+}
+
+.calendar .fc-toolbar-chunk {
+    display: inline-flex;
+    align-items: end;
+}
+
+.calendar .fc-toolbar-chunk .fc-toolbar-title {
+    margin: 0;
+}
+
+.calendar .fc-next-button.fc-button.fc-button-primary {
+    margin: 0;
+}
+
+.calendar .fc-prev-button.fc-button.fc-button-primary,
+.calendar .fc-next-button.fc-button.fc-button-primary {
+    background-color: transparent;
+    color: black;
+    border: none;
+    transition: transform 0.3s;
+}
+
+.calendar .fc-prev-button.fc-button.fc-button-primary:hover,
+.calendar .fc-next-button.fc-button.fc-button-primary:hover {
+    color: blue;
+    transform: scale(1.5);
+}
+
+.calendar .fc-prev-button.fc-button.fc-button-primary:focus,
+.calendar .fc-next-button.fc-button.fc-button-primary:focus {
+    outline: none;
+}
+
+.calendar .fc-prev-button.fc-button.fc-button-primary:active,
+.calendar .fc-next-button.fc-button.fc-button-primary:active {
+    outline: none;
+}
+
+.fc-event-title {
+    border-radius: 2px;
+    padding-left: 3px;
+}
+
+.fc-event-time,
+.fc-daygrid-event-dot {
+    display: none;
+}
+
+.fc .fc-scrollgrid-liquid {
+    height: 100%;
+    margin-top: -12px;
+}
+
+/* hari */
+.selected-emails-container {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.selected-email {
+    background-color: #3949ab;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-top: 10px;
+    margin-right: 10px;
+    color: white;
+}
+
+.remove-email {
+    font-weight: 900;
+    border-radius: 50%;
+    margin-left: 5px;
+    color: white;
+    cursor: pointer;
+    background-color: white;
+    padding: 0px 7px;
+    color: #3949ab;
+}
+
+.remove-email:hover {
+    font-weight: 900;
+    border-radius: 50%;
+    background-color: red;
+    padding: 0px 7px;
+    color: white;
+}
+
+.modal-header {
+    background-color: #3949ab;
+}
+
+.modal-title {
+    color: white;
+}
+
+.modal .modal-header .close {
+    color: white;
+    transition: transform 0.3s;
+}
+
+.modal .modal-header .close:hover {
+    background-color: transparent;
+    transform: scale(1.3);
+}
+
+.modal .modal-footer {
+    padding: 0;
+    padding-top: 10px;
+    border-top: none;
+}
+
+.btn {
+    padding: 0px;
+}
+
+.btn-primary,
+.btn-danger {
+    font-weight: 700;
+    padding: 5px;
+}
+
+.form-label {
+    color: #3949ab;
+    font-weight: bold;
+}
+
+.form-label::after {
+    content: " *";
+    color: red;
+}
+
+.helpdetails h6,
+.cls-types {
+    color: #3949ab;
+}
+
+.eventDetails span,
+.sprintDetails span,
+.timeLogSection span {
+    color: black;
+}
+
+.helpdetails span {
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.helpdetails {
+    color: black;
+}
+
+.eventDetails a span:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.meeting-attendees p {
+    color: #3949ab;
+}
+
+.meeting-attendees label {
+    color: black;
+}
+
+.meeting-attendees input {
+    color: gray;
+}
+
+/* ram */
+.scrollable {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.meeting-attendees label {
+    font-weight: bold;
+    width: 30%;
+}
+
+.meeting-attendees input {
+    margin-bottom: 15px;
+    width: 50%;
+}
+
+@media (max-width: 992px) {
+    /* .calendar {
+        padding-right: 1px;
+    } */
+}
+
+@media (max-width: 768px) {
+    /* .calendar {
+        padding-top: 10px;
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-bottom: 15px;
+    } */
+}
+
+@media (max-width: 500px) {
+    /* .calendar {
+        padding-top: 40px;
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-bottom: 10px;
+    } */
+}
+
+.eventDetails b,
+.sprintDetails b,
+.timeLogSection b {
+    color: #3949ab;
+    display: inline-block;
+    width: 160px;
+}
+
+/* .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-1.pb-1.mb-2.border-bottom {
+    display: none !important;
+}
+
+.cls-p {
+    display: none;
+} */
+
+#sprintButton {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: -4%;
+    margin-top: 3%;
+}
+
+.alterButton {
+    margin: 0 auto;
+}
+
+#orgButton {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* pagination design for create group */
+#pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+}
+
+#pagination #pageIndicator {
+    margin: 0 10px;
+}
+
+/* group members design */
+.btn-close.btn-close-white {
+    vertical-align: text-bottom;
+}
+
+#prevButton,
+#nextButton {
+    background-color: #4A90E2;
+    color: white;
+    font-size: 1rem;
+    padding: 5px 20px;
+    border-radius: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 5px;
+    border: none;
+}
+
+#pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prevButton,
+#nextButton {
+    visibility: hidden;
+}
+
+#prevButton.show,
+#nextButton.show {
+    visibility: visible;
+}
+
+/* add or invite team */
+.cls-add-members {
+    background-color: transparent;
+    border: none;
+    color: #3949AB;
+    font-weight: bold;
+}
+
+/* toast design */
+.toast.fade.show {
+    width: 28rem;
+    font-size: 1rem;
+}
+
+.member-list li {
+    padding-left: 10px;
+    border-left: 2px solid #3949AB;
+    margin: 2px 0px;
+}
+
+/* button colour */
+.button {
+    color: #fff;
+    background-color: #4A90E2;
+    font-size: 1rem;
+    padding: 5px 20px;
+    border-radius: 2rem;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    /* Makes the text bold */
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #357ABD;
+    /* Slightly darker blue for hover effect */
+}
+
+.email-option {
+    padding-left: 10px;
+    color: black;
+    font-weight: 100;
+}
+
+.cls-membersth {
+    text-align: left;
+}
+
+/* ************brain***************** */
+.highlighted {
+    background-color: #e0e0e0;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.dropdown-menu {
+    width: 47%;
+}
+
+#userstoryDropdown label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.view-details {
+    text-align: end;
+    padding-right: 10px;
+}
+
+.table thead th {
+    background-color: #e8eaf6;
+    color: #3949ab;
+}
+
+#epic-checkbox-container label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
