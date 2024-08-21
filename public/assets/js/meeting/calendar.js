@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     headerToolbar: {
       start: "prev today next",
       center: "title",
-      end: "HelpButton GroupButton MeetingDropdown MeetTypeDropdown ProductDropdown StatusDropdown",
+      end: "StatusDropdown",
     },
     dayMaxEventRows: true,
     fixedWeekCount: true,
@@ -320,7 +320,6 @@ document.addEventListener("DOMContentLoaded", function () {
      * @param {Object} info - Information about the clicked date.
      */
     dateClick: function (info) {
-      if (permissions.scheduleMeeting) {
         const currentDate = new Date();
         const clickedDate = new Date(info.dateStr);
         document.getElementById("meeting_start_date").value = info.dateStr;
@@ -345,7 +344,6 @@ document.addEventListener("DOMContentLoaded", function () {
           $("#scheduleMeetingForm").show();
           document.getElementById("formOperation").value = "insert";
         }
-      }
     },
 
     /**
@@ -980,33 +978,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var customButtonEl4 = document.querySelector(".fc-MeetTypeDropdown-button");
   var customButtonEl5 = document.querySelector(".fc-HelpButton-button");
 
-  // Set HTML content for the dropdown buttons
-  customButtonEl1.innerHTML = `
-  <div class="btn-group">
-  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="productDropdown"></div>      
-  </div>
-  `;
-
-  customButtonEl2.innerHTML = `
-  <div class="btn-group">
-  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Events: Meeting</button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-  <a class="dropdown-item events" href="#" id="meeting-anchor"><i class="fas fa-users" style="margin-right: 10px;"></i>Meeting</a>
-  <a class="dropdown-item events" href="#" id="sprint-dropdown"><i class="fas fa-tachometer-alt" style="margin-right: 10px;"></i>Sprint</a>
-  </div>
-  </div>
-  `;
-  // Initialize tooltips for the Meeting dropdown button and its items
-
-  initializeTooltip(
-    "#dropdownMenuButton2",
-    "Filter Events by Meetings and Sprint",
-    "top"
-  );
-  initializeTooltip("#meeting-anchor", "Filter by Meetings Schedules", "top");
-  initializeTooltip("#sprint-dropdown", "Filter by Sprints Status", "left");
-
   customButtonEl3.innerHTML = `
   <div class="btn-group">
   <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Status</button>
@@ -1018,95 +989,43 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
   </div>
   `;
-  initializeTooltip("#dropdownMenuButton3", "Filter by Status", "top");
-
-  customButtonEl4.innerHTML = `
-  <div class="btn-group">
-  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MeetType</button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4" id="meetTypeDropdown"></div>
-  </div>
-  `;
-
-  customButtonEl5.innerHTML = `
-  <div class="btn-group">
-  <button class="help-button" type="button" id="helpButton" onclick="showEventDetailsModal();"><i class="fas fa-question"></i></button>
-  </div>
-  `;
-  initializeTooltip("#helpButton", "How to use calendar", "top");
-  initializeTooltip("#dropdownMenuButton4", "Filter by MeetType", "top");
-
-  if (!permissions.groupButton) {
-    document.querySelector(
-      ".fc-GroupButton-button.fc-button.fc-button-primary"
-    ).style.display = "none";
-  }
-  if (permissions.groupButton) {
-    var customButtonEl6 = document.querySelector(".fc-GroupButton-button");
-
-    customButtonEl6.innerHTML = `
-          <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Group</button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton5" id="groupDropdown">
-          <div class="btn-group">
-              <button class="dropdown-item" type="button" name="createGroupButton" id="createGroupButton" onclick="createGroup();"><i class="fas fa-user-friends"></i> Create group</button>
-          </div>
-          <div class="btn-group">
-              <button class="dropdown-item" type="button" name="GroupEditbutton" id="GroupEditbutton"  onclick="editGroup();"><i class="fas fa-pencil-alt"></i> Edit group</button>
-          </div>
-          <div class="btn-group">
-              <button class="dropdown-item" type="button" name="GroupDeletebutton" id="GroupDeletebutton"  onclick="DeleteGroup();"><i class="fas fa-times-circle"></i> Delete group</button>
-          </div>
-          </div>
-          </div>`;
-  }
-
-  initializeTooltip(
-    "#dropdownMenuButton5",
-    "Create / Edit Group for Meetings",
-    "top"
-  );
-
-  // Initial Visibility
-  // Hide the dropdown buttons
-  document.querySelector(".fc-ProductDropdown-button").style.display = "none";
-  document.querySelector(".fc-MeetTypeDropdown-button").style.display = "block";
 
   // Event Handlers
-  document
-    .getElementById("meeting-anchor")
-    .addEventListener("click", function () {
-      document.querySelector(".fc-ProductDropdown-button").style.display =
-        "none";
-      document.querySelector(".fc-MeetTypeDropdown-button").style.display =
-        "block";
-    });
+  // document
+  //   .getElementById("meeting-anchor")
+  //   .addEventListener("click", function () {
+  //     document.querySelector(".fc-ProductDropdown-button").style.display =
+  //       "none";
+  //     document.querySelector(".fc-MeetTypeDropdown-button").style.display =
+  //       "block";
+  //   });
 
-  document
-    .getElementById("sprint-dropdown")
-    .addEventListener("click", function () {
-      document.querySelector(".fc-ProductDropdown-button").style.display =
-        "block";
-      document.querySelector(".fc-MeetTypeDropdown-button").style.display =
-        "none";
-    });
+  // document
+  //   .getElementById("sprint-dropdown")
+  //   .addEventListener("click", function () {
+  //     document.querySelector(".fc-ProductDropdown-button").style.display =
+  //       "block";
+  //     document.querySelector(".fc-MeetTypeDropdown-button").style.display =
+  //       "none";
+  //   });
 
-  // Event listeners for the custom dropdown options for product
-  document.querySelectorAll(".dropdown-item.meetType").forEach((item) => {
-    item.addEventListener("click", function (event) {
-      event.preventDefault();
-      document.getElementById("dropdownMenuButton4").innerHTML =
-        "<b>MeetType</b>: " + this.innerText;
-    });
-  });
+  // // Event listeners for the custom dropdown options for product
+  // document.querySelectorAll(".dropdown-item.meetType").forEach((item) => {
+  //   item.addEventListener("click", function (event) {
+  //     event.preventDefault();
+  //     document.getElementById("dropdownMenuButton4").innerHTML =
+  //       "<b>MeetType</b>: " + this.innerText;
+  //   });
+  // });
 
-  // Event listeners for the custom dropdown options for product
-  document.querySelectorAll(".dropdown-item.product").forEach((item) => {
-    item.addEventListener("click", function (event) {
-      event.preventDefault();
-      document.getElementById("dropdownMenuButton1").innerHTML =
-        "<b>Product</b>: " + this.textContent;
-    });
-  });
+  // // Event listeners for the custom dropdown options for product
+  // document.querySelectorAll(".dropdown-item.product").forEach((item) => {
+  //   item.addEventListener("click", function (event) {
+  //     event.preventDefault();
+  //     document.getElementById("dropdownMenuButton1").innerHTML =
+  //       "<b>Product</b>: " + this.textContent;
+  //   });
+  // });
 
   // Event listeners for the custom dropdown options for status
   document.querySelectorAll(".dropdown-item.status").forEach((item) => {
@@ -1118,20 +1037,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Event listeners for the custom dropdown options for events
-  document.querySelectorAll(".dropdown-item.events").forEach((item) => {
-    item.addEventListener("click", function (event) {
-      event.preventDefault();
-      document.getElementById("dropdownMenuButton2").innerHTML =
-        "<b>Events</b>: " + this.innerText;
-      currentEventType = this.innerText; // Update the currentEventType based on selection
+  // document.querySelectorAll(".dropdown-item.events").forEach((item) => {
+  //   item.addEventListener("click", function (event) {
+  //     event.preventDefault();
+  //     document.getElementById("dropdownMenuButton2").innerHTML =
+  //       "<b>Events</b>: " + this.innerText;
+  //     currentEventType = this.innerText; // Update the currentEventType based on selection
 
-      if (this.innerText === "Sprint") {
-        showSprint(sprintDetails);
-      } else if (this.innerText === "Meeting") {
-        showMeetings(meetingDetails);
-      }
-    });
-  });
+  //     if (this.innerText === "Sprint") {
+  //       showSprint(sprintDetails);
+  //     } else if (this.innerText === "Meeting") {
+  //       showMeetings(meetingDetails);
+  //     }
+  //   });
+  // });
 
   /**
    * Show initial meetings on the calendar.
@@ -1465,36 +1384,49 @@ var selectedEmailsInput = document.getElementById("selectedEmailsInput");
  */
 function filterEmails(event) {
   var input, filter, div, labels, i, txtValue;
+  
+  // Get the input field and its value
   input = document.getElementById("teamInput");
   filter = input.value.trim().toUpperCase();
+  
+  // Get the dropdown and the labels within it
   div = document.getElementById("emailDropdown");
   labels = div.getElementsByClassName("email-option");
+  
   var hasMatch = false;
   var matchCount = 0;
+  
+  // Loop through all labels and filter based on input value
   for (i = 0; i < labels.length; i++) {
     txtValue = labels[i].textContent.trim().toUpperCase();
     if (txtValue.startsWith(filter) && matchCount < 4) {
-      labels[i].style.display = "";
+      labels[i].style.display = ""; // Show the label
       hasMatch = true;
       matchCount++;
     } else {
-      labels[i].style.display = "none";
+      labels[i].style.display = "none"; // Hide the label
     }
   }
+  
+  // Show or hide the dropdown based on matches
   if (hasMatch && filter.length > 0) {
     div.classList.add("show");
   } else {
     div.classList.remove("show");
   }
+  
   // Handle arrow key (Tab or Right Arrow) selection
-  if (event.key === "ArrowRight" || event.key === "Tab") {
-    autofillInput(filter);
-  }
-  // Check if Enter key is pressed
-  if (event.key === "Enter") {
-    addFirstMatchingEmail(filter);
+  if (event) {
+    if (event.key === "ArrowRight" || event.key === "Tab") {
+      autofillInput(filter);
+    }
+    // Check if Enter key is pressed
+    if (event.key === "Enter") {
+      addFirstMatchingEmail(filter);
+    }
   }
 }
+
 // Attach click event listener to the dropdown labels
 document
   .getElementById("emailDropdown")

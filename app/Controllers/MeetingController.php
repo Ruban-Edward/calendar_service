@@ -9,10 +9,10 @@
  *             retrieving and updating meeting details and handling meeting cancellations
  */
 namespace App\Controllers;
-use CodeIgniter\HTTP\Response;
+
 use App\Helpers\CustomHelpers;
+use CodeIgniter\HTTP\Response;
 use DateTime;
-use App\Services\EmailService;
 
 class MeetingController extends BaseController
 {
@@ -53,16 +53,16 @@ class MeetingController extends BaseController
             'sprintDetails' => $this->meetingModelObj->ShowSprint($id),
             'sprintDuration' => $this->meetingModelObj->getSprintDuration(),
             'sprintStatus' => $this->meetingModelObj->getSprintStatus(),
-            'groupName' => $this->MeetingTeamModelObj->getTeamMembers($id)
+            'groupName' => $this->MeetingTeamModelObj->getTeamMembers($id),
         ];
 
         // echo "hello";
-        return $this->template_view('calendar',$calendarData);
+        return $this->template_view('calendar', $calendarData);
     }
 
     /**
      * @author   Rama Selvan
-     * @updated  Hari Sankar, Rama Selvan 
+     * @updated  Hari Sankar, Rama Selvan
      * @param int $id
      * @return Response A JSON-encoded response containing the sprint details.
      * Retrieves meeting details by ID and returns them as a JSON response.
@@ -136,7 +136,8 @@ class MeetingController extends BaseController
             $data['meeting_start_time'] = $this->convertMinutesToDateTime($data['meeting_start_time']);
             $data['meeting_end_time'] = $this->convertMinutesToDateTime($data['meeting_end_time']);
             $data['meeting_duration'] = $this->convertHoursAndMinutesToDuration($data['meeting_duration_hours'], $data['meeting_duration_minutes']);
-            $data['r_user_id'] = $data['r_user_id_created'] = session()->get('employee_id');
+            $data['r_user_id'] = 36;
+            $data['r_user_id_created'] = 36;
             $data['created_date'] = date("Y-m-d H:i:s");
             $data['r_sprint_id'] = $this->request->getPost('r_sprint_id');
 
@@ -185,7 +186,7 @@ class MeetingController extends BaseController
                 }
                 $emailData = $this->prepareEmailData($membersEmail, $data);
                 session()->remove('toast_shown');
-                $this->emailService->sendMail($emailData);
+                // $this->emailService->sendMail($emailData);
                 return $this->response->setJSON(['success' => true, 'mail' => true]);
             }
         }
@@ -193,7 +194,7 @@ class MeetingController extends BaseController
     }
     /**
      * Retrieves the selected members' emails and group members' names..
-     * @author Gokul 
+     * @author Gokul
      * @param string $selectedEmails A comma-separated string of selected email addresses.
      * @param mixed  $group          The group identifier used to fetch group details.
      * @return array The array of member details, including selected emails and group members' names.
@@ -226,7 +227,7 @@ class MeetingController extends BaseController
         $meetData = [
             'meeting_start_date' => $data['meeting_start_date'],
             'meeting_start_time' => $data['meeting_start_time'],
-            'meeting_end_time' => $data['meeting_end_time']
+            'meeting_end_time' => $data['meeting_end_time'],
         ];
         $Conflict = $this->meetingModelObj->getMeetingMembersConflict($meetData);
         $conflictNames = [];
@@ -269,7 +270,7 @@ class MeetingController extends BaseController
      */
     private function addHostToMembers($membersId)
     {
-        $membersId[] = session()->get('first_name');
+        $membersId[] = "Yuvansri Thangavel";
         return $membersId;
     }
     /**
@@ -303,7 +304,7 @@ class MeetingController extends BaseController
                 'meeting_start_time' => CustomHelpers::convertTo12HourFormat($data['meeting_start_time']),
                 'meeting_end_time' => CustomHelpers::convertTo12HourFormat($data['meeting_end_time']),
                 'meeting_link' => $data['meeting_link'],
-            ]
+            ],
         ];
     }
 
@@ -358,7 +359,8 @@ class MeetingController extends BaseController
             $data['meeting_start_time'] = $this->convertMinutesToDateTime($data['meeting_start_time']);
             $data['meeting_end_time'] = $this->convertMinutesToDateTime($data['meeting_end_time']);
             $data['meeting_duration'] = $this->convertHoursAndMinutesToDuration($data['meeting_duration_hours'], $data['meeting_duration_minutes']);
-            $data['r_user_id'] = $data['r_user_id_updated'] = session()->get('employee_id');
+            $data['r_user_id'] = 36;
+            $data['r_user_id_updated'] = 36;
             $data['updated_date'] = date("Y-m-d H:i:s");
             $data['r_sprint_id'] = $this->request->getPost('r_sprint_id');
 
@@ -398,7 +400,7 @@ class MeetingController extends BaseController
                     // If update was successful, prepare data for updating meeting members
                     $memberData = [
                         'meeting_id' => $data['meeting_id'],
-                        'selected_members' => $membersId
+                        'selected_members' => $membersId,
                     ];
                     $this->meetingMembersUpdate($memberData);
                 }
@@ -422,7 +424,7 @@ class MeetingController extends BaseController
             // Skip empty members
             $data = [
                 'r_meeting_details_id' => $result,
-                'r_user_id' => $member
+                'r_user_id' => $member,
             ];
             $checkValidations = $this->hasInvalidInput($this->MeetingMemberModelObj, $data);
             if ($checkValidations !== true) {
@@ -447,7 +449,7 @@ class MeetingController extends BaseController
         foreach ($selectedMembersArray as $member) {
             $data = [
                 'r_meeting_details_id' => $memberData['meeting_id'],
-                'r_user_id' => $member
+                'r_user_id' => $member,
             ];
             $checkValidations = $this->hasInvalidInput($this->MeetingMemberModelObj, $data);
             if ($checkValidations !== true) {
@@ -469,7 +471,7 @@ class MeetingController extends BaseController
         foreach ($Not_Selected_members as $member) {
             $data = [
                 'r_user_id' => $member,
-                'r_meeting_details_id' => $memberData['meeting_id']
+                'r_meeting_details_id' => $memberData['meeting_id'],
             ];
             $this->MeetingMemberModelObj->deletingExistingMembers($data);
         }
@@ -546,10 +548,10 @@ class MeetingController extends BaseController
                     'meeting_start_date' => $getMail[0]["meeting_start_date"],
                     'meeting_start_time' => CustomHelpers::convertTo12HourFormat($getMail[0]["meeting_start_time"]),
                     'meeting_end_time' => CustomHelpers::convertTo12HourFormat($getMail[0]["meeting_end_time"]),
-                    'cancel_reason' => $getMail[0]["cancel_reason"]
-                ]
+                    'cancel_reason' => $getMail[0]["cancel_reason"],
+                ],
             ];
-            $this->emailService->sendMail($emailData);
+            // $this->emailService->sendMail($emailData);
         }
     }
 
@@ -569,7 +571,7 @@ class MeetingController extends BaseController
             'meetingId' => $this->request->getPost('meetingId'),
             'productId' => $this->request->getPost('product'),
             'sprintId' => $this->request->getPost('sprintId'),
-            'meetType' => $this->request->getPost('mtype')
+            'meetType' => $this->request->getPost('mtype'),
         ];
         $issue = $this->getOrCreateMeetingIssue($issueData);
         switch ($meetType) {
@@ -589,7 +591,7 @@ class MeetingController extends BaseController
         foreach ($attendees as $attendee) {
             $id = $attendee['id'];
             try {
-                 $timeLog->timeEntryLog([
+                $timeLog->timeEntryLog([
                     'project_id' => $this->request->getPost('product'),
                     'author_id' => session()->get('employee_id'),
                     'user_id' => $attendee['id'],
@@ -602,7 +604,7 @@ class MeetingController extends BaseController
                     'tmonth' => intval($dateTime->format('m')),
                     'tweek' => intval($dateTime->format('W')),
                     'created_on' => date('Y-m-d H:i:s'),
-                    'updated_on' => date('Y-m-d H:i:s')
+                    'updated_on' => date('Y-m-d H:i:s'),
                 ]);
             } catch (\Exception $e) {
                 log_message('error', "Exception while logging time for attendee ID: $id - " . $e->getMessage());
@@ -624,54 +626,54 @@ class MeetingController extends BaseController
      * @return int|null The ID of the existing or newly created issue, or null if no issue was found or created.
      */
     private function getOrCreateMeetingIssue($data)
-{
-    $issueService = service('issues');
-    $meetingDetails = $this->MeetingDetailModelObj->getMeetingDetails($data['meetingId']);
-    $externalIssueId = null;
+    {
+        $issueService = service('issues');
+        $meetingDetails = $this->MeetingDetailModelObj->getMeetingDetails($data['meetingId']);
+        $externalIssueId = null;
 
-    if ($data['meetType'] == 2) {
-        $BrainStromMeetingDetailsModelobj = model(\App\Models\Meeting\BrainstormMeetingDetailsModel::class);
-        $externalIssueId = $BrainStromMeetingDetailsModelobj->getBacklogId(['meeting_details_id' => $data['meetingId']]);
-    } elseif ($data['meetType'] == 3) {
-        $externalIssueId = $this->MeetingDetailModelObj->getExternalIssueIdForSprint(['r_sprint_id' => $data['sprintId']]);
+        if ($data['meetType'] == 2) {
+            $BrainStromMeetingDetailsModelobj = model(\App\Models\Meeting\BrainstormMeetingDetailsModel::class);
+            $externalIssueId = $BrainStromMeetingDetailsModelobj->getBacklogId(['meeting_details_id' => $data['meetingId']]);
+        } elseif ($data['meetType'] == 3) {
+            $externalIssueId = $this->MeetingDetailModelObj->getExternalIssueIdForSprint(['r_sprint_id' => $data['sprintId']]);
+        }
+
+        if (!$externalIssueId) {
+            $issueData = [
+                'project_id' => $data['productId'],
+                'task_title' => $meetingDetails['meeting_title'] ?? "N/A",
+                'task_subject' => "Time logging issue for " . $this->getMeetingTypeString($data['meetType']),
+                'task_description' => "Time logging issue for meeting: {$meetingDetails['meeting_description']}",
+                'task_assignee' => session()->get('employee_id'),
+                'task_priority' => 2,
+                'task_statuses' => 1,
+                'task_tracker' => 15,
+                'author_id' => session()->get('employee_id'),
+                'created_on' => date("Y-m-d H:i:s"),
+                'updated_on' => date("Y-m-d H:i:s"),
+            ];
+
+            $externalIssueId = $issueService->insertTasksId($issueData);
+        }
+
+        $this->MeetingDetailModelObj->updateMeetingDetailsExternal([
+            'external_issue_id' => $externalIssueId,
+            'meeting_details_id' => $data['meetingId'],
+        ]);
+
+        return $externalIssueId;
     }
 
-    if (!$externalIssueId) {
-        $issueData = [
-            'project_id' => $data['productId'],
-            'task_title' => $meetingDetails['meeting_title'] ?? "N/A",
-            'task_subject' => "Time logging issue for " . $this->getMeetingTypeString($data['meetType']),
-            'task_description' => "Time logging issue for meeting: {$meetingDetails['meeting_description']}",
-            'task_assignee' => session()->get('employee_id'),
-            'task_priority' => 2,
-            'task_statuses' => 1,
-            'task_tracker' => 15,
-            'author_id' => session()->get('employee_id'),
-            'created_on' => date("Y-m-d H:i:s"),
-            'updated_on' => date("Y-m-d H:i:s")
-        ];
-
-        $externalIssueId = $issueService->insertTasksId($issueData);
+    private function getMeetingTypeString($meetType)
+    {
+        return match ($meetType) {
+            1 => "General meetings",
+            2 => "Backlogs Brainstroming meeting",
+            3 => "Sprint meetings",
+            default => "Unknown meeting type",
+        };
     }
 
-    $this->MeetingDetailModelObj->updateMeetingDetailsExternal([
-        'external_issue_id' => $externalIssueId,
-        'meeting_details_id' => $data['meetingId']
-    ]);
-
-    return $externalIssueId;
-}
-
-private function getMeetingTypeString($meetType)
-{
-    return match ($meetType) {
-        1 => "General meetings",
-        2 => "Backlogs Brainstroming meeting",
-        3 => "Sprint meetings",
-        default => "Unknown meeting type",
-    };
-}
- 
     /**
      * Handles the creation of a new meeting group and its members.
      * @author Hari sankar
@@ -701,7 +703,7 @@ private function getMeetingTypeString($meetType)
             $teamId = $this->MeetingTeamModelObj->createGroup($data);
             $data = [
                 'selectedTeamMembers' => $selectedTeamMembers,
-                'r_meeting_team_id' => $teamId
+                'r_meeting_team_id' => $teamId,
             ];
             $this->insertGroupMembers($data);
             return $this->response->setJSON(['success' => true, 'message' => 'Group Created Successfully']);
@@ -711,7 +713,7 @@ private function getMeetingTypeString($meetType)
     /**
      * Inserts group members into a meeting team.
      *@author Hari  sankar
-     * @param array $data An associative array 
+     * @param array $data An associative array
      * @return \CodeIgniter\HTTP\Response|void JSON response containing 'errors' (if validation fails).
      */
     public function insertGroupMembers($data)
@@ -719,7 +721,7 @@ private function getMeetingTypeString($meetType)
         foreach ($data['selectedTeamMembers'] as $value) {
             $data = [
                 'r_meeting_team_id' => $data['r_meeting_team_id'],
-                'r_external_employee_id' => $value
+                'r_external_employee_id' => $value,
             ];
             $checkValidations = $this->hasInvalidInput($this->MeetingTeamMemberModelObj, $data);
             if ($checkValidations !== true) {
@@ -771,7 +773,7 @@ private function getMeetingTypeString($meetType)
             $this->MeetingTeamModelObj->editTeamDetails($data);
             $data = [
                 'selectedTeamMembers' => $selectedTeamMembers,
-                'r_meeting_team_id' => $data['meeting_team_id']
+                'r_meeting_team_id' => $data['meeting_team_id'],
             ];
             $this->editGroupMembers($data);
             return $this->response->setJSON(['update' => true, 'message' => 'Group Updated Successfully']);
@@ -795,7 +797,7 @@ private function getMeetingTypeString($meetType)
             $membersTeam[] = $value;
             $data = [
                 'r_meeting_team_id' => $data['r_meeting_team_id'],
-                'r_external_employee_id' => $value
+                'r_external_employee_id' => $value,
             ];
             $checkValidations = $this->hasInvalidInput($this->MeetingTeamMemberModelObj, $data);
             if ($checkValidations !== true) {
@@ -814,7 +816,7 @@ private function getMeetingTypeString($meetType)
         foreach ($Not_Selected_members as $member) {
             $data = [
                 'r_external_employee_id' => $member,
-                'r_meeting_team_id' => $data['r_meeting_team_id']
+                'r_meeting_team_id' => $data['r_meeting_team_id'],
             ];
             $result = $this->MeetingTeamMemberModelObj->deletingGroupMembers($data);
         }
@@ -829,7 +831,7 @@ private function getMeetingTypeString($meetType)
     {
         if ($this->request->getPost()) {
             $id = $this->request->getPost('groupSelect');
-            if ($id == NULL) {
+            if ($id == null) {
                 return $this->response->setJSON(['deleted' => false, 'message' => 'Failed']);
             }
             $data = ['team_id' => $id];
@@ -868,7 +870,7 @@ private function getMeetingTypeString($meetType)
             'team_members_email' => $mememail,
             'meettype' => $meetingType,
             'meettypeId' => $meetingTypeId,
-            'team_members_id' => $memid
+            'team_members_id' => $memid,
         ];
 
         return $this->response->setJSON($response);
@@ -952,8 +954,8 @@ private function getMeetingTypeString($meetType)
 
     /**
      * Generates a UUID (Universally Unique Identifier).
-     * The UUID is generated using a combination of random values and specific 
-     * formatting to ensure uniqueness. The format follows the UUID version 4 
+     * The UUID is generated using a combination of random values and specific
+     * formatting to ensure uniqueness. The format follows the UUID version 4
      * specification, which is randomly generated.
      * @return string The generated UUID.
      */
